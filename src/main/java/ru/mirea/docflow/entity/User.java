@@ -17,9 +17,9 @@ public class User {
     private String login;
     private String password;
     @Column(name = "last_name")
-    private String firstName;
-    @Column(name = "first_name")
     private String lastName;
+    @Column(name = "first_name")
+    private String firstName;
     @ManyToMany
     @JoinTable(name = "user_documents",
             joinColumns = @JoinColumn(name = "user_id"),
