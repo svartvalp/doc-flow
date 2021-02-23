@@ -1,4 +1,4 @@
-package ru.mirea.docflow.contoller;
+package ru.mirea.docflow.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 

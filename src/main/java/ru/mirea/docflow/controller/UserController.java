@@ -1,4 +1,4 @@
-package ru.mirea.docflow.contoller;
+package ru.mirea.docflow.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
