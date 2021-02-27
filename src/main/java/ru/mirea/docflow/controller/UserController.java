@@ -1,12 +1,12 @@
 package ru.mirea.docflow.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ru.mirea.docflow.dto.UserDto;
 import ru.mirea.docflow.entity.User;
 import ru.mirea.docflow.service.UserService;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -17,10 +17,13 @@ public class UserController {
 
 
     @PostMapping(value = "/register")
-    public void registerUser(@RequestBody User user) {
+    public void registerUser(@RequestBody UserDto user) {
         userService.registerUser(user);
     }
 
-
+    @GetMapping("/users")
+    public List<UserDto> getAllUsers(@RequestParam(value = "query", required = false) String query) {
+        return userService.GetAllUsers(query);
+    }
 
 }

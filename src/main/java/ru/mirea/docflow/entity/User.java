@@ -13,7 +13,8 @@ import java.util.List;
 public class User {
     @Id
     @Column(name = "id")
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String login;
     private String password;
     @Column(name = "last_name")
