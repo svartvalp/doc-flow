@@ -18,8 +18,8 @@ public class DocumentController {
 
 
     @PostMapping(value = "/document")
-    public Document createDocument(@RequestBody DocumentDto document) {
-        return documentService.saveDocument(document);
+    public Document createDocument(@RequestBody DocumentDto document, @RequestParam("user_id") int userId) {
+        return documentService.saveDocument(document, userId);
     }
 
     @SneakyThrows

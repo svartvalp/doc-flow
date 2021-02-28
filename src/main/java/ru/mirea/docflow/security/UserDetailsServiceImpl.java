@@ -19,7 +19,7 @@ public class UserDetailsServiceImpl  implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var user = userDao.findByLogin(username);
+        var user = userDao.findByLogin(username).orElseThrow(() -> new UsernameNotFoundException(username));
         return new User(user.getLogin(), user.getPassword(), List.of(new SimpleGrantedAuthority("ROLE_USER")));
     }
 }

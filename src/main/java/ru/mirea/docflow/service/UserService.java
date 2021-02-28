@@ -9,4 +9,6 @@ public interface UserService {
     void registerUser(UserDto user);
 
     List<UserDto> GetAllUsers(String query);
+
+    UserDto getUserInfo(String name);
 }

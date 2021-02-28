@@ -6,6 +6,7 @@ import ru.mirea.docflow.dto.UserDto;
 import ru.mirea.docflow.entity.User;
 import ru.mirea.docflow.service.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -21,9 +22,15 @@ public class UserController {
         userService.registerUser(user);
     }
 
-    @GetMapping("/users")
+    @GetMapping("")
     public List<UserDto> getAllUsers(@RequestParam(value = "query", required = false) String query) {
         return userService.GetAllUsers(query);
+    }
+
+
+    @GetMapping("/info")
+    public UserDto getUserInfo( Principal principal) {
+        return userService.getUserInfo(principal.getName());
     }
 
 }

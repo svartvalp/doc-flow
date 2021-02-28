@@ -5,9 +5,10 @@ import org.springframework.stereotype.Repository;
 import ru.mirea.docflow.entity.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserDao extends JpaRepository<User, Integer> {
-    User findByLogin(String login);
+    Optional<User> findByLogin(String login);
     List<User> findByFirstNameLikeOrLastNameLike(String firstName, String lastName);
 }

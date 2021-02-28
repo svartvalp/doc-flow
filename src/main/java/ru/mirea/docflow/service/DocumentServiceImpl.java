@@ -7,6 +7,7 @@ import ru.mirea.docflow.dao.DocumentDao;
 import ru.mirea.docflow.dao.UserDao;
 import ru.mirea.docflow.dto.DocumentDto;
 import ru.mirea.docflow.entity.Document;
+import ru.mirea.docflow.exception.AlreadyExistsException;
 import ru.mirea.docflow.exception.EntityNotFoundException;
 import ru.mirea.docflow.exception.UniqueConstraintFailedException;
 
@@ -34,20 +35,34 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public void addDocument(int userId, int docId) {
-        var user = userDao.findById(userId);
-        var document = documentDao.findById(docId);
-        user
-                .orElseThrow(EntityNotFoundException::new)
+        var user = userDao.findById(userId).orElseThrow(EntityNotFoundException::new);
+        var document = documentDao.findById(docId).orElseThrow(EntityNotFoundException::new);
+        if (user
                 .getDocuments()
-                .add(document.orElseThrow(EntityNotFoundException::new));
-        userDao.save(user.orElseThrow(EntityNotFoundException::new));
+                .stream()
+                .anyMatch(doc -> doc
+                        .getId()
+                        .equals(document
+                                .getId()))) {
+            throw new AlreadyExistsException();
+        }
+        user
+                .getDocuments()
+                .add(document);
+        userDao.save(user);
     }
 
     @Override
-    public Document saveDocument(DocumentDto document) {
-        documentDao.findByName(document.getName()).ifPresent((a) ->{ throw  new UniqueConstraintFailedException();});
+    public Document saveDocument(DocumentDto document, int userId) {
+        documentDao.findByName(document.getName()).ifPresent((a) -> {
+            throw new UniqueConstraintFailedException();
+        });
         document.setCreatedAt(LocalDateTime.now());
-        return documentDao.save(modelMapper.map(document, Document.class));
+        var user = userDao.findById(userId).orElseThrow(EntityNotFoundException::new);
+        var saved = documentDao.save(modelMapper.map(document, Document.class));
+        user.getDocuments().add(saved);
+        userDao.save(user);
+        return saved;
     }
 
     @Override
