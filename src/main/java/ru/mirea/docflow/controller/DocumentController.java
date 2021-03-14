@@ -2,6 +2,8 @@ package ru.mirea.docflow.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.mirea.docflow.dto.DocumentDto;
@@ -34,8 +36,12 @@ public class DocumentController {
     }
 
     @GetMapping(value = "/document/{id}/data")
-    public byte[] getDocData(@PathVariable("id") int docId) {
-        return documentService.getDocumentData(docId);
+    public ResponseEntity<byte[]> getDocData(@PathVariable("id") int docId) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type","application/pdf");
+        return
+                ResponseEntity.ok().headers(headers).body( documentService.getDocumentData(docId));
+
     }
 
     @PutMapping(value = "/user/{userId}/document/{docId}")
