@@ -3,12 +3,10 @@ services:
   postgres:
     image: postgres:11
     ports:
-      - '5432:5432'
-    volumes:
-      - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./postgresql/data:/var/lib/postgresql/data
+      - '5433:5432'
     environment:
       POSTGRES_PASSWORD: "admin"
       POSTGRES_USER: "admin"
       POSTGRES_DB: "doc-flow"
+      COMPOSE_CONVERT_WINDOWS_PATHS: "false"
     restart: always

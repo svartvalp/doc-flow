@@ -19,5 +19,5 @@ spring:
   datasource:
     username: admin
     password: admin
-    url: jdbc:postgresql://localhost:5432/doc-flow
+    url: jdbc:postgresql://localhost:5433/doc-flow
     platform: postgresql
