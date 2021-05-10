@@ -54,9 +54,6 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public Document saveDocument(DocumentDto document, int userId) {
-        documentDao.findByName(document.getName()).ifPresent((a) -> {
-            throw new UniqueConstraintFailedException();
-        });
         document.setCreatedAt(LocalDateTime.now());
         var user = userDao.findById(userId).orElseThrow(EntityNotFoundException::new);
         var saved = documentDao.save(modelMapper.map(document, Document.class));
