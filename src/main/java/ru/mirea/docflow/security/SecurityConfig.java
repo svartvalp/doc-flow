@@ -25,7 +25,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler((req, res, auth) -> res.setStatus(HttpServletResponse.SC_OK))
                 .failureHandler((req, res, auth) -> res.setStatus(HttpServletResponse.SC_UNAUTHORIZED))
                 .and()
-                .logout().logoutUrl("/logout")
+                .logout()
+                .logoutSuccessHandler((req, res, auth) -> res.setStatus(HttpServletResponse.SC_OK))
+                .permitAll(true)
+                .logoutUrl("/logout")
                 .and().exceptionHandling()
                 .accessDeniedHandler((req, res, e) -> res.setStatus(HttpServletResponse.SC_UNAUTHORIZED))
                 .authenticationEntryPoint((req, res, e) -> res.setStatus(HttpServletResponse.SC_UNAUTHORIZED));
