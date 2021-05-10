@@ -84,5 +84,6 @@ public class DocumentServiceImpl implements DocumentService {
         var id = userService.getUserInfo(username).getId();
         var user = userDao.findById(id).orElseThrow(EntityNotFoundException::new);
         user.setDocuments(user.getDocuments().stream().filter(document -> document.getId() != docId).collect(Collectors.toList()));
+        userDao.save(user);
     }
 }
