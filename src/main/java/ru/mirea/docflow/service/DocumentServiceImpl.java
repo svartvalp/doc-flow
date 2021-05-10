@@ -9,7 +9,6 @@ import ru.mirea.docflow.dto.DocumentDto;
 import ru.mirea.docflow.entity.Document;
 import ru.mirea.docflow.exception.AlreadyExistsException;
 import ru.mirea.docflow.exception.EntityNotFoundException;
-import ru.mirea.docflow.exception.UniqueConstraintFailedException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,6 +20,7 @@ public class DocumentServiceImpl implements DocumentService {
     private final UserDao userDao;
     private final DocumentDao documentDao;
     private final ModelMapper modelMapper;
+    private final UserService userService;
 
 
     @Override
@@ -80,7 +80,9 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
-    public void deleteDocument(int docId) {
-        documentDao.deleteById(docId);
+    public void deleteDocument(int docId, String username) {
+        var id = userService.getUserInfo(username).getId();
+        var user = userDao.findById(id).orElseThrow(EntityNotFoundException::new);
+        user.setDocuments(user.getDocuments().stream().filter(document -> document.getId() != docId).collect(Collectors.toList()));
     }
 }

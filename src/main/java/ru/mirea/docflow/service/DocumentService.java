@@ -18,5 +18,5 @@ public interface DocumentService {
 
     byte[] getDocumentData(int docId);
 
-    void deleteDocument(int docId);
+    void deleteDocument(int docId, String username);
 }

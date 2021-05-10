@@ -10,6 +10,7 @@ import ru.mirea.docflow.dto.DocumentDto;
 import ru.mirea.docflow.entity.Document;
 import ru.mirea.docflow.service.DocumentService;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -55,8 +56,8 @@ public class DocumentController {
     }
 
     @DeleteMapping(value = "/document/{id}")
-    public void deleteDocument(@PathVariable("id") int docId) {
-        documentService.deleteDocument(docId);
+    public void deleteDocument(@PathVariable("id") int docId, Principal principal) {
+        documentService.deleteDocument(docId, principal.getName());
     }
 
 }
