@@ -57,6 +57,12 @@ function App() {
         setIsAuthorization(true);
     };
 
+    const deleteDocument = (documentId) => {
+        const newDocs = documents.filter(doc => doc.id !== documentId);
+        docClient.deleteDoc(documentId);
+        setDocuments(newDocs);
+    }
+
     React.useEffect(() => {
         getDocuments();
     }, [login, id]);
@@ -76,36 +82,51 @@ function App() {
         getInfo();
     }, []);
     return (
-        <>
-            {showAddDocumentModal && (
-                <AddDocumentModal
-                    cancelHandler={hideAddDocumentModalHandler}
-                    updateData={getDocuments}
-                    hideAddDocumentModalHandler={hideAddDocumentModalHandler}
-                />
-            )}
-            {showDocumentShareModal && (
-                <DocumentShareModal cancelHandler={hideDocumentShareModalHandler}/>
-            )}
-            {login && id ? (
-                <MainPage
-                    username={login}
-                    showAddDocumentModal={showAddDocumentModalHandler}
-                    showDocumentShareModalHandler={showDocumentShareModalHandler}
-                    documents={documents}
-                />
-            ) : isAuthorization ? (
-                <AuthorizationPage
-                    switchToRegister={switchToRegister}
-                    setLogin={setLogin}
-                    setId={setId}
-                    setFirstName={setFirstName}
-                />
-            ) : (
-                <RegisterPage switchToAuthorize={switchToAuthorize}/>
-            )}
-        </>
-    );
+        < >
+        {showAddDocumentModal && (
+        < AddDocumentModal
+    cancelHandler = {hideAddDocumentModalHandler}
+    updateData = {getDocuments}
+    hideAddDocumentModalHandler = {hideAddDocumentModalHandler}
+    />
+)
+}
+    {
+        showDocumentShareModal && (
+        < DocumentShareModal
+        cancelHandler = {hideDocumentShareModalHandler}
+        hideDocumentShareModalHandler = {hideDocumentShareModalHandler}
+        />
+    )
+    }
+    {
+        login && id ? (
+            < MainPage
+            username = {login}
+        showAddDocumentModal = {showAddDocumentModalHandler}
+        showDocumentShareModalHandler = {showDocumentShareModalHandler}
+        documents = {documents}
+        deleteDocument = {deleteDocument}
+        />
+    ) :
+        isAuthorization ? (
+            < AuthorizationPage
+            switchToRegister = {switchToRegister}
+        setLogin = {setLogin}
+        setId = {setId}
+        setFirstName = {setFirstName}
+        />
+    ) :
+        (
+        < RegisterPage
+        switchToAuthorize = {switchToAuthorize}
+        />
+    )
+    }
+<
+    />
+)
+    ;
 }
 
 export default App;

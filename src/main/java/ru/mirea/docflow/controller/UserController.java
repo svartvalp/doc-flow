@@ -26,7 +26,6 @@ public class UserController {
         return userService.GetAllUsers(query);
     }
 
-
     @GetMapping("/info")
     public UserDto getUserInfo(Principal principal) {
         return userService.getUserInfo(principal.getName());

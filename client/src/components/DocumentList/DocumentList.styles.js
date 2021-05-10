@@ -19,7 +19,7 @@ export const useStyles = makeStyles((theme) => ({
   listWrapper: {
     justifySelf: "center",
     alignSelf: "center",
-    width: "40vw",
+    width: "50vw",
     height: "80vh",
     borderRadius: 10,
     display: "flex",
@@ -73,7 +73,7 @@ export const useStyles = makeStyles((theme) => ({
     paddingBottom: 9,
   },
   share: {
-    width: "10%",
+    width: "5%",
     textAlign: "start",
     backgroundColor: "#6c7ae0",
     color: "#fff",

@@ -4,7 +4,7 @@ import { useStyles } from "./DocumentList.styles.js";
 import DocumentModal from "../DocumentModal/DocumentModal";
 import { DocumentService } from "../../ClientService/DocumentService/DocumentService";
 
-const DocumentList = ({ showDocumentShareModalHandler, documents }) => {
+const DocumentList = ({ showDocumentShareModalHandler, documents, deleteDocument }) => {
   const classes = useStyles();
   const client = new DocumentService();
   const [preview, setPreview] = React.useState("");
@@ -15,6 +15,7 @@ const DocumentList = ({ showDocumentShareModalHandler, documents }) => {
   const cancelPreview = (event) => {
     setPreview("");
   };
+
   return (
     <div className={classes.root}>
       {preview && (
@@ -27,6 +28,7 @@ const DocumentList = ({ showDocumentShareModalHandler, documents }) => {
             <tr className={classes.headerRow}>
               <th className={classes.title}>Title</th>
               <th className={classes.date}>Date Created</th>
+              <th className={classes.share}></th>
               <th className={classes.share}></th>
             </tr>
           </thead>
@@ -41,6 +43,7 @@ const DocumentList = ({ showDocumentShareModalHandler, documents }) => {
                   date={item.createdAt}
                   showPreview={showPreview}
                   share={showDocumentShareModalHandler}
+                  deleteDocument={deleteDocument}
                 />
               ))}
           </tbody>

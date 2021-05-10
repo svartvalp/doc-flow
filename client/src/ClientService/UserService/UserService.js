@@ -49,4 +49,11 @@ export class UserService {
 
     return options;
   }
+
+  async userLogout() {
+    const url = "/logout";
+    const result = await fetch(url, {
+      method: "POST"});
+    document.location.reload();
+  }
 }

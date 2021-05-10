@@ -9,12 +9,9 @@ export class DocumentService {
   async createDocument(userId, name) {
     const url = `/document?user_id=${userId}`;
     const currentDate = new Date();
-    const newName = `${name}${Math.random()}-document{${
-      Math.random() * 10 * Math.random()
-    }}`;
     const body = {
       createdAt: currentDate.toISOString(),
-      name: newName,
+      name,
     };
     const result = await fetch(url, {
       method: "POST",
@@ -35,6 +32,7 @@ export class DocumentService {
   }
 
   async makeDocument(userId, name, document) {
+    console.log(name);
     const docId = await this.createDocument(userId, name);
     const result = await this.uploadDocument(document, docId);
   }
@@ -43,6 +41,13 @@ export class DocumentService {
     const url = `/user/${userId}/document/${docId}`;
     const response = await fetch(url, {
       method: "PUT",
+    });
+  }
+
+  async deleteDoc(docId) {
+    const url = `/document/${docId}`;
+    const response = await fetch(url, {
+      method: "DELETE",
     });
   }
 }

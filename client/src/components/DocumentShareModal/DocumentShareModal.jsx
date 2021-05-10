@@ -6,7 +6,7 @@ import Select from "react-select";
 import { UserService } from "../../ClientService/UserService/UserService";
 import { DocumentService } from "../../ClientService/DocumentService/DocumentService";
 
-const DocumentShareModal = ({ cancelHandler }) => {
+const DocumentShareModal = ({ cancelHandler, hideDocumentShareModalHandler }) => {
   const classes = useStyles();
   const [users, setUsers] = React.useState([]);
   const [selectValue, setSelectValue] = React.useState("");
@@ -19,6 +19,7 @@ const DocumentShareModal = ({ cancelHandler }) => {
 
   const handleSubmit = async () => {
     const flag = await docClient.shareDocument(selectValue, window.documentID);
+    hideDocumentShareModalHandler()
   };
 
   React.useEffect(() => {

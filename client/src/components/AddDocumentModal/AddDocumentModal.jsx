@@ -43,7 +43,7 @@ const AddDocumentModal = ({
       fileName,
       formData
     );
-    if (makeResult) updateData();
+    updateData();
     hideAddDocumentModalHandler();
   };
   const uploadHandler = () => {

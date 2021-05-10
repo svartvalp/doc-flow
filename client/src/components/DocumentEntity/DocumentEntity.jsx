@@ -1,9 +1,10 @@
 import React from "react";
 import { useStyles } from "./DocumentEntity.styles.js";
 import shareIcon from "../../assets/icons/shareIcon.svg";
+import trashIcon from "../../assets/icons/trashIcon.svg";
 import clsx from "clsx";
 
-const DocumentEntity = ({ name, showPreview, id, date, share }) => {
+const DocumentEntity = ({ name, showPreview, id, date, share, deleteDocument }) => {
   const classes = useStyles();
   const clickHandler = (event, id) => {
     showPreview(id);
@@ -14,6 +15,13 @@ const DocumentEntity = ({ name, showPreview, id, date, share }) => {
       event.stopPropagation();
     }
     share(id);
+  };
+
+  const deleteClickHandler = (event) => {
+    if (event.target.alt === "delete") {
+      event.stopPropagation();
+    }
+    deleteDocument(id);
   };
   return (
     <tr
@@ -29,6 +37,15 @@ const DocumentEntity = ({ name, showPreview, id, date, share }) => {
           className={classes.icon}
           src={shareIcon}
           alt="share"
+        />
+      </td>
+      <td className={clsx(classes.shareCell)}>
+        {" "}
+        <img
+            onClick={deleteClickHandler}
+            className={classes.icon}
+            src={trashIcon}
+            alt="delete"
         />
       </td>
     </tr>

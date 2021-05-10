@@ -22,6 +22,9 @@ export const useStyles = makeStyles((theme) => ({
     margin: "20px",
     cursor: "default",
   },
+  logoutButton: {
+    margin: "10px",
+  },
   button: {
     display: "flex",
     width: "2%",

@@ -8,6 +8,7 @@ const MainPage = ({
                       showAddDocumentModal,
                       showDocumentShareModalHandler,
                       documents,
+                      deleteDocument
                   }) => {
     const classes = useStyles();
     return (
@@ -16,6 +17,7 @@ const MainPage = ({
             <DocumentList
                 showDocumentShareModalHandler={showDocumentShareModalHandler}
                 documents={documents}
+                deleteDocument={deleteDocument}
             />
         </div>
     );
