@@ -14,7 +14,7 @@ export class DocumentService {
     }}`;
     const body = {
       createdAt: currentDate.toISOString(),
-      newName,
+      name: newName,
     };
     const result = await fetch(url, {
       method: "POST",

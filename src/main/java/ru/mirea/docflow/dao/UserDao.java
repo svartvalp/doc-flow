@@ -10,5 +10,6 @@ import java.util.Optional;
 @Repository
 public interface UserDao extends JpaRepository<User, Integer> {
     Optional<User> findByLogin(String login);
+
     List<User> findByFirstNameLikeOrLastNameLike(String firstName, String lastName);
 }

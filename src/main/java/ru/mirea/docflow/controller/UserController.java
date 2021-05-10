@@ -3,7 +3,6 @@ package ru.mirea.docflow.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.mirea.docflow.dto.UserDto;
-import ru.mirea.docflow.entity.User;
 import ru.mirea.docflow.service.UserService;
 
 import java.security.Principal;
@@ -29,7 +28,7 @@ public class UserController {
 
 
     @GetMapping("/info")
-    public UserDto getUserInfo( Principal principal) {
+    public UserDto getUserInfo(Principal principal) {
         return userService.getUserInfo(principal.getName());
     }
 

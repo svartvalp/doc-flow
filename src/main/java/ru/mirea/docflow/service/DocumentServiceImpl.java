@@ -81,4 +81,9 @@ public class DocumentServiceImpl implements DocumentService {
     public byte[] getDocumentData(int docId) {
         return documentDao.findById(docId).orElseThrow(EntityNotFoundException::new).getBody();
     }
+
+    @Override
+    public void deleteDocument(int docId) {
+        documentDao.deleteById(docId);
+    }
 }

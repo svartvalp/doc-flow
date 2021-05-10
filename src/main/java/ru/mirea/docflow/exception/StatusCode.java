@@ -7,11 +7,11 @@ public enum StatusCode {
     private final int value;
 
 
-    public int getValue() {
-        return value;
-    }
-
     StatusCode(int value) {
         this.value = value;
+    }
+
+    public int getValue() {
+        return value;
     }
 }

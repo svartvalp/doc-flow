@@ -38,9 +38,9 @@ public class DocumentController {
     @GetMapping(value = "/document/{id}/data")
     public ResponseEntity<byte[]> getDocData(@PathVariable("id") int docId) {
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Content-Type","application/pdf");
+        headers.set("Content-Type", "application/pdf");
         return
-                ResponseEntity.ok().headers(headers).body( documentService.getDocumentData(docId));
+                ResponseEntity.ok().headers(headers).body(documentService.getDocumentData(docId));
 
     }
 
@@ -54,5 +54,9 @@ public class DocumentController {
         return documentService.getUserDocuments(userId);
     }
 
+    @DeleteMapping(value = "/document/{id}")
+    public void deleteDocument(@PathVariable("id") int docId) {
+        documentService.deleteDocument(docId);
+    }
 
 }

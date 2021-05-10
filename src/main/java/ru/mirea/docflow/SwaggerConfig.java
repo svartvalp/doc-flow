@@ -21,34 +21,35 @@ import java.time.LocalDateTime;
 @EnableSwagger2
 @Configuration
 @ConfigurationProperties("spring.api")
-@ConditionalOnProperty(name="spring.api.swagger.enable", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(name = "spring.api.swagger.enable", havingValue = "true", matchIfMissing = false)
 @Getter
 @Setter
 public class SwaggerConfig {
     private String version;
- 	private String title;
- private String description;
-	private String basePackage;
-	private String contactName;
-	private String contactEmail;
-	@Bean
-	public Docket api() {
-        		return new Docket(DocumentationType.SWAGGER_2)
-        			.select()
-        			.apis(RequestHandlerSelectors.basePackage(basePackage))
-        			.paths(PathSelectors.any())
-        			.build()
-        			.directModelSubstitute(LocalDate.class, java.sql.Date.class)
-        			.directModelSubstitute(LocalDateTime.class, java.util.Date.class)
-        			.apiInfo(apiInfo());
-        	}
+    private String title;
+    private String description;
+    private String basePackage;
+    private String contactName;
+    private String contactEmail;
 
-        	private ApiInfo apiInfo() {
-        		return new ApiInfoBuilder()
-        			.title(title)
-        		.description(description)
-        			.version(version)
-        			.contact(new Contact(contactName, null, contactEmail))
-        			.build();
-        	}
+    @Bean
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.basePackage(basePackage))
+                .paths(PathSelectors.any())
+                .build()
+                .directModelSubstitute(LocalDate.class, java.sql.Date.class)
+                .directModelSubstitute(LocalDateTime.class, java.util.Date.class)
+                .apiInfo(apiInfo());
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title(title)
+                .description(description)
+                .version(version)
+                .contact(new Contact(contactName, null, contactEmail))
+                .build();
+    }
 }

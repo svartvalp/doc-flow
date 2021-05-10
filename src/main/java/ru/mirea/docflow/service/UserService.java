@@ -1,7 +1,6 @@
 package ru.mirea.docflow.service;
 
 import ru.mirea.docflow.dto.UserDto;
-import ru.mirea.docflow.entity.User;
 
 import java.util.List;
 

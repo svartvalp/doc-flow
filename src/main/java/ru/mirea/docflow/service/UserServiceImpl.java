@@ -35,9 +35,9 @@ public class UserServiceImpl implements UserService {
                     .findByFirstNameLikeOrLastNameLike(query, query)
                     .stream()
                     .map(user -> {
-                         var res = modelMapper.map(user, UserDto.class);
-                         res.setPassword("");
-                         return res;
+                        var res = modelMapper.map(user, UserDto.class);
+                        res.setPassword("");
+                        return res;
                     })
                     .collect(Collectors.toList());
         } else {
